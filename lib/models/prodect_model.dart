@@ -1,19 +1,20 @@
 class prodectModel {
-  final int id;
+  final dynamic id;
   final String title;
-  final double price;
+  final dynamic price;
   final String description;
   final String category;
-  final ratingModel rating;
+  final ratingModel? rating;
+  final String image;
 
-  prodectModel({
-    required this.id,
-    required this.title,
-    required this.price,
-    required this.description,
-    required this.category,
-    required this.rating,
-  });
+  prodectModel(
+      {required this.id,
+      required this.title,
+      required this.price,
+      required this.description,
+      required this.category,
+      required this.rating,
+      required this.image});
 
   factory prodectModel.fromjson(jsondata) {
     return prodectModel(
@@ -22,12 +23,15 @@ class prodectModel {
         price: jsondata['price'],
         description: jsondata['description'],
         category: jsondata['category'],
-        rating: jsondata['rating']);
+        image: jsondata['image'],
+        rating: jsondata['rating'] == null
+            ? null
+            : ratingModel.fromjson(jsondata['rating']));
   }
 }
 
 class ratingModel {
-  final double rate;
+  final dynamic rate;
   final int count;
 
   ratingModel({required this.rate, required this.count});
